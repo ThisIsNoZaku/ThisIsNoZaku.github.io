@@ -1,0 +1,62 @@
+body{
+	overflow: hidden;
+}
+
+div{
+	overflow-x: auto;
+	overflow-y: auto;
+	max-height: 100vh;
+}
+
+#sidebar{
+	float: left;
+	left: 300px;
+	margin-left: -300px;
+	position: relative;
+	width: 25%;
+}
+
+
+#contentWrapper{
+	float: right;
+	width: 74%;
+	height: 100%;
+	overflow: auto;
+	border-color: red;
+	border-style: outset;
+}
+
+#messages{
+	height: 14vh;
+	border-bottom: medium outset red;
+}
+
+#messagedisplay{
+	overflow-y: auto;
+	position: relative;
+	height: 84vh;
+}
+
+#messages + #messagedisplay{
+	border-bottom: none;
+}
+
+.Terrible{
+	color: #FF0000;	
+}
+
+.Poor{
+	color: #FF8800;
+}
+
+.Adequate{
+	color: #008800;
+}
+
+.Good{
+	color: #0088FF;
+}
+
+.Excellent{
+	color: #0000FF;
+}
