@@ -5,11 +5,12 @@
 		<script type="text/javascript" src="scripts/jquery-1.11.0.min.js"></script>
 		<script type="text/javascript" src="scripts/index.js"></script>
 		<script type="text/javascript" src="scripts/game.js"></script>
+		<script type="text/javascript" src="scripts/events.js"></script>
 		<link rel="stylesheet" type="text/css" href="styles/styling.css"></link>
 	</head>
 	<body>
 		<div id="sidebar">
-			<ul class="display" id="economy"><h1>Economy</h1>
+			<ul id="economy"><h1>Economy</h1>
 				<ul><h3>Growth</h3>
 					<li id="growth"></li>
 				</ul>
@@ -26,68 +27,96 @@
 					<li id="education"></li>
 				</ul>
 			</ul>
-			<ul class="display" id="politics"><h1>Politics</h1>
-				<ul class="faction" id="militarists"><h3> Militarists</h3>
-				<ul><b>Influence</b>
-					<li id="miltiarists_power"></li>
+			<ul id="politics"><h1>Politics</h1>
+				<ul><h3>Militarists</h3>
+					<ul><b>Influence</b>
+						<li id="militarists_power"></li>
+					</ul>
+					<ul><b>Support</b>
+						<li id="militarists_support"></li>
+					</ul>
 				</ul>
-				<ul><b>Support</b>
-					<li id="miltiarists_support"></li>
+				<ul><h3>Industrialists</h3>
+					<ul><b>Influence</b>
+						<li id="industrialists_power"></li>
+					</ul>
+					<ul><b>Support</b>
+						<li id="industrialists_support"></li>
+					</ul>
 				</ul>
+				<ul ><h3>Religious</h3>
+					<ul><b>Influence</b>
+						<li id="religious_power"></li>
+					</ul>
+					<ul><b>Support</b>
+						<li id="religious_support"></li>
+					</ul>
 				</ul>
-				<ul class="faction" id="industrialists"> <h3>Industrialists</h3>
-					<li id="industrialists_power"></li>
-					<li id="industrialists_support"></li>
+				<ul><h3>Socialists</h3>
+					<ul><b>Influence</b>
+						<li id="socialists_power"></li>
+					</ul>
+					<ul><b>Support</b>
+						<li id="socialists_support"></li>
+					</ul>
 				</ul>
-				<ul class="faction" id="religious"> <h3>Religious</h3>
-					<li id="religious_power"></li>
-					<li id="religious_support"></li>
+				<ul><h3>Intellectuals</h3>
+					<ul><b>Influence</b>
+						<li id="intellectuals_power"></li>
+					</ul>
+					<ul><b>Support</b>
+						<li id="intellectuals_support"></li>
+					</ul>
 				</ul>
-				<ul class="faction" id="socialists"> <h3>Socialists</h3>
-					<li id="socialists_power"></li>
-					<li id="socialists_support"></li>
+				<ul><h3>Capitalists</h3>
+					<ul><b>Influence</b>
+						<li id="capitalists_power"></li>
+					</ul>
+					<ul><b>Support</b>
+						<li id="capitalists_support"></li>
+					</ul>
 				</ul>
-				<ul class="faction" id="intellectuals"> <h3>Intellectuals</h3>
-					<li id="intellectuals_power"></li>
-					<li id="intellectuals_support"></li>
+				<ul><h3>Communists</h3>
+					<ul><b>Influence</b>
+						<li id="communists_power"></li>
+					</ul>
+					<ul><b>Support</b>
+						<li id="communists_support"></li>
+					</ul>
 				</ul>
-				<ul class="faction" id="capitalists"> <h3>Capitalists</h3>
-					<li id="capitalists_power"></li>
-					<li id="capitalists_support"></li>
+				
+				<ul  id="diplomacy"><h1>Diplomacy</h1>
+					<ul><h3>US Opinion</h3>
+						<li id="usopinion"></li>
+					</ul>
+					<ul><h3>USSR Opinion</h3>
+						<li id="ussropinion"></li>
+					</ul>
 				</ul>
-				<ul class="faction" id="communists"> <h3>Communists</h3>
-					<li id="communists_power"></li>
-					<li id="communists_support"></li>
+				<ul  id="security"><h1>Security</h1>
+					<ul id="military"><h3>Military</h3>
+						<li id="military_quality"></li>
+						<li id="military_reliability"></li>
+					</ul>
+					<ul id="police"><h3>Police</h3>
+						<li id="police_quality"></li>
+						<li id="police_reliability"></li>
+					</ul>
+					<ul id="intelligence_service"><h3>Intelligence Services</h3>
+						<li id="intelligence_service_quality"></li>
+						<li id="intelligence_service_reliability"></li>
+					</ul>
 				</ul>
-			</ul>
-			<ul class="display" id="diplomacy"><h1>Diplomacy</h1>
-				<ul><h3>US Opinion</h3>
-					<li id="usopinion"></li>
-				</ul>
-				<ul><h3>USSR Opinion</h3>
-					<li id="ussropinion"></li>
-				</ul>
-			</ul>
-			<ul class="display" id="security"><h1>Security</h1>
-				<ul id="military"><h3>Military</h3>
-					<li id="military_quality"></li>
-					<li id="military_reliability"></li>
-				</ul>
-				<ul id="police"><h3>Police</h3>
-					<li id="police_quality"></li>
-					<li id="police_reliability"></li>
-				</ul>
-				<ul id="intelligence_service"><h3>Intelligence Services</h3>
-					<li id="intelligence_service_quality"></li>
-					<li id="intelligence_service_reliability"></li>
-				</ul>
-			</ul>
-		</div>
-		<div id="contentWrapper">
-			<div id="messages">
 			</div>
-			<div id="messagedisplay"></div>
+			<div id="contentWrapper">
+	<div id="messages">
+	</div>
+	<div id="messagedisplay"></div>
+	
+</div>
+<div id="footer">
+		<button id="endturn" style="float:right">Next Turn</button>
 		</div>
-		</body>
-		
-			</html>								
+</body>
+
+</html>													

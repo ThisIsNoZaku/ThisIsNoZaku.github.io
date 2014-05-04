@@ -10,17 +10,17 @@ div{
 
 #sidebar{
 	float: left;
-	left: 300px;
-	margin-left: -300px;
+	left: 500px;
+	margin-left: -500px;
 	position: relative;
-	width: 25%;
+	width: 28%;
 }
 
 
 #contentWrapper{
 	float: right;
-	width: 74%;
-	height: 100%;
+	width: 70%;
+	height: 90vh;
 	overflow: auto;
 	border-color: red;
 	border-style: outset;
@@ -34,11 +34,12 @@ div{
 #messagedisplay{
 	overflow-y: auto;
 	position: relative;
-	height: 84vh;
 }
 
-#messages + #messagedisplay{
-	border-bottom: none;
+#footer{
+	float:right;
+	width: 70%;
+	position: relative;
 }
 
 .Terrible{

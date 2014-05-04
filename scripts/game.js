@@ -12,7 +12,7 @@ var Country = function(){
 		education: 0,
 		militarists: 0
 	}
-	this.modifiers = []
+	this.modifiers = {}
 }
 
 var Faction = function(power, support){
@@ -20,12 +20,13 @@ var Faction = function(power, support){
 	this.support= support
 }
 
-var Message = function(title, body, options, game){
+var Message = function(title, body, isSecret, options, game){
 	if (typeof Message.prototype.counter === 'undefined')
 		Message.prototype.counter = 0;
 	else
 		Message.prototype.counter++;
 	this.id = Message.prototype.counter
+	this.isSecret = isSecret;
 	this.title = title,
 	this.body = body
 	this.options = options
@@ -46,8 +47,12 @@ var MessageOption = function(description, effects, acceptMessage){
 	
 	this.apply = function(country){
 		for (var stat in effects){
-			country[stat] += effects[stat]
-			$("#sidebar").trigger("stats_changed")
+			if (typeof country[stat] !== 'undefined'){
+				country[stat] += effects[stat]
+				$().trigger("stats changed")
+			} else {
+				country["modifiers"][stat] = effects[stat]
+			}
 		}
 	}
 }
@@ -59,78 +64,108 @@ var SecurityService = function(quality, reliability){
 
 var initialize = (function(){
 	var game = new Game()
-
-	var mod = generateRandomStats(0);
-	game.country["growth"] = mod;
-	mod = generateRandomStats(mod);
-	game.country["infrastructure"] = mod
-	mod = generateRandomStats(mod);
-	game.country["food"] = mod
-	mod = generateRandomStats(mod);
-	game.country["medicalcare"] = mod
-	mod = generateRandomStats(mod);
-	game.country["education"] = mod
+	var variance = 2;
+	var mod = 0;
+	var stat = generateRandomStats(mod, variance)
+	game.country["growth"] = stat;
+	mod += stat;
+	stat = generateRandomStats(mod, variance)
+	game.country["infrastructure"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["food"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["medicalcare"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["education"] = stat
 	
-	mod = generateRandomStats(mod);
-	game.country["miltiarists_power"] = mod
-	mod = generateRandomStats(mod);
-	game.country["miltiarists_support"] = mod
-	mod = generateRandomStats(mod);
-	game.country["industrialists_power"] = mod
-	mod = generateRandomStats(mod);
-	game.country["industrialists_support"] = mod
-	mod = generateRandomStats(mod);
-	game.country["religious_power"] = mod
-	mod = generateRandomStats(mod);
-	game.country["religious_support"] = mod
-	mod = generateRandomStats(mod);
-	game.country["socialists_power"] = mod
-	mod = generateRandomStats(mod);
-	game.country["socialists_support"] = mod
-	mod = generateRandomStats(mod);
-	game.country["intellectuals_power"] = mod
-	mod = generateRandomStats(mod);
-	game.country["intellectuals_support"] = mod
-	mod = generateRandomStats(mod);
-	game.country["capitalists_power"] = mod
-	mod = generateRandomStats(mod);
-	game.country["capitalists_support"] = mod
-	mod = generateRandomStats(mod);
-	game.country["communists_power"] = mod
-	mod = generateRandomStats(mod);
-	game.country["communists_support"] = mod
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["militarists_power"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["militarists_support"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["industrialists_power"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["industrialists_support"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["religious_power"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["religious_support"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["socialists_power"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["socialists_support"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["intellectuals_power"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["intellectuals_support"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["capitalists_power"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["capitalists_support"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["communists_power"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["communists_support"] = stat
 	
-	mod = generateRandomStats(mod);
-	game.country["usopinion"] = mod
-	mod = generateRandomStats(mod);
-	game.country["ussropinion"] = mod
+	mod += stat
+	stat = 0
+	game.country["usopinion"] = stat
+	mod += stat
+	stat = 0
+	game.country["ussropinion"] = stat
 	
-	mod = generateRandomStats(mod);
-	game.country["military_quality"] = mod
-	mod = generateRandomStats(mod);
-	game.country["military_reliability"] = mod
-	mod = generateRandomStats(mod);
-	game.country["police_quality"] = mod
-	mod = generateRandomStats(mod);
-	game.country["police_reliability"] = mod
-	mod = generateRandomStats(mod);
-	game.country["intelligence_service_quality"] = mod
-	mod = generateRandomStats(mod);
-	game.country["intelligence_service_reliability"] = mod
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["military_quality"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["military_reliability"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["police_quality"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["police_reliability"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["intelligence_service_quality"] = stat
+	mod += stat
+	stat = generateRandomStats(mod, variance)
+	game.country["intelligence_service_reliability"] = stat
 	
 	game.messages = [new Message("Americans", "This is a Test Message about Americans", [new MessageOption("Click this to increase your US Opinion", {"usopinion": 1}, "The US appreciates your aid in the fight against Communism")], game),
-					 new Message("Russians", "This is a Test Message about Russians", [new MessageOption("Click this to increase your USSR Opinion", {"ussropinion": 1}, "The USSR appreciates your help in the fight against Imperialism")], game)
+	new Message("Russians", "This is a Test Message about Russians", [new MessageOption("Click this to increase your USSR Opinion", {"ussropinion": 1}, "The USSR appreciates your help in the fight against Imperialism")], game)
 	]
 	
 	return game;
 })
 
-var generateRandomStats = function(mod){
-	var result = Math.floor((Math.random() * 5) -2) - mod
-	if (result < -2)
-		return -2;
-	else if (result > 2)
-		return 2;
-	else
+var generateRandomStats = function(modifier, variance){
+	var result = Math.floor((Math.random() * ((2 * variance) + 1)) - variance ) - modifier
+	if (result < -variance){
+		return -variance;
+	} 
+	else if (result > variance){
+		return variance;
+	}
+	else{
 		return result;
+	}
 }
