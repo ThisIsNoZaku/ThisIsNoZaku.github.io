@@ -11,8 +11,9 @@ $().ready(function(){
 	
 	$("#endturn").click(function(){
 		var newMessages = triggerRandomEvents();
-		for (var message in newMessages)
-		game["messages"].push(newMessages[message]);
+		for (var message in newMessages){
+			game["messages"].push(newMessages[message]);
+		}
 		$("#messages").trigger('messages_changed');
 	})
 	populateMessages(game["messages"])
@@ -50,7 +51,6 @@ var populateMessages = function(messages){
 	for (var index in messages){
 		if (messages[index].isSecret == true){
 			messages[index]["options"][0].apply(game["country"])
-			console.log("secret")
 			} else {
 			(function(){
 				var message = messages[index];

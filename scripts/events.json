@@ -1,0 +1,46 @@
+{
+	id: 1,
+	message:{
+		title: "Found American Spies",
+		description: "Your intelligence services have discovered CIA agents operating in your country",
+		secret: true,
+		options:[
+			{
+				description: "Ignore Them",
+				effects:{
+					"usrelations" : 0.5,
+					"ussrrelations" : -0.5,
+					"hasCIASpies": true
+				}
+				message: "You ignore the American agents and cover up their presence. The US appreciates being allowed to pursue it's interests unhindered."
+			},
+			{
+				description: "Publicly Expel Them",
+				effects:{
+					"usrelations" : -0.5,
+					"ussrrelations" : 0.5,
+					"hasCIASpies": false
+				}
+				message: "You throw the agents out of the country and loudly denounce this imperialist meddling. The US is irritated while the Soviets are pleased by your thumbing your nose at the Americans."
+			}
+			{
+				description: "Execute Them",
+				effects:{
+					"usrelations" : -2,
+					"hasCIASpies": false,
+					"nationalists_support": 2,
+					"militarists_support": 2,
+					"capitalists_support": -2
+				}
+				message: "In a shocking display of brutality, you publicly execute the spies. The United States is outraged, and even the Soviets are surprised.
+				Hardliners and pro-Soviet elements within your own government are pleased by the show of defiance, while those with western leanings are upset."
+			}
+		]
+		chance: 
+		"if (gameState['country']['modifiers']['hasCIASpies'] !== 'undefined'){
+			if (gameState['country']['modifiers']['hasCIASpies'] == true){
+				return 5 * (gameState['country']['intelligence_services_quality'] + 2)
+			}
+		}"
+	}
+}

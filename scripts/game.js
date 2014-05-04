@@ -154,6 +154,8 @@ var initialize = (function(){
 	new Message("Russians", "This is a Test Message about Russians", [new MessageOption("Click this to increase your USSR Opinion", {"ussropinion": 1}, "The USSR appreciates your help in the fight against Imperialism")], game)
 	]
 	
+	loadEvents();
+	
 	return game;
 })
 
