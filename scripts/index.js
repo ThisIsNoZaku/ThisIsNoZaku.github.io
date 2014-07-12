@@ -1,5 +1,5 @@
 $().ready(function(){
-	game = initialize()
+	game = new Game()
 	var country = game["country"]
 	
 	$("#messages").on('messages_changed', function(){
@@ -10,7 +10,7 @@ $().ready(function(){
 	})
 	
 	$("#endturn").click(function(){
-		var newMessages = triggerRandomEvents();
+		var newMessages = triggerRandomEvents(game);
 		for (var message in newMessages){
 			game["messages"].push(newMessages[message]);
 		}

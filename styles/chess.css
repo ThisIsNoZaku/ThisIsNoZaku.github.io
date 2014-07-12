@@ -1,0 +1,19 @@
+.space{
+	
+}
+
+.space.black{
+	float:left;
+	width: 2em;
+	height: 2em;
+	position: relative;
+	background-color: Black;
+}
+
+.space.white{
+	float:left;
+	width: 2em;
+	height: 2em;
+	position: relative;
+	background-color: Red;
+}

@@ -1,173 +1,126 @@
 var Game = function(){
-	this.messages = {},
+	this.messages = [],
 	this.country = new Country()
-}
-
-var Country = function(){
-	this.stats = {
-		growth : 0,
-		infrastructure: 0,
-		food: 0,
-		medicalcare: 0,
-		education: 0,
-		militarists: 0
+	
+	for (var stat in this.country.economy){
+		$("#economy").append("<ul id="+ stat +"><h3>" + stat.charAt(0).toUpperCase() + stat.substr(1) +"<h3></ul>")
+		$("#economy > #" + stat).append("<li id=v'value'>" + this.country.economy[stat].getDescriptiveStat("value") + "</li>").attr('title', this.country.economy[stat].description)
 	}
-	this.modifiers = {}
+	
+	for (var faction in this.country.factions){
+		$("#politics").append("<ul id="+ this.country.factions[faction].name +"><h3>" + this.country.factions[faction].name +"<h3></ul>").attr("title", "These are the powerful, influential groups in your country.")
+		var description = this.country.factions[faction].description;
+		
+		$("#politics > #" + this.country.factions[faction].name).append("<ul id='influence'><b>Influence</b><ul/>")
+		$("#politics > #" + this.country.factions[faction].name +" > #influence").append("<li>"+ this.country.factions[faction].getDescriptiveStat("power") +"</li>").attr("title", "Influence is the relative power this faction has in your country. "+
+		"The higher Influence is, the more power the faction has to help or hinder your governance of the country.")
+		
+		$("#politics > #" + this.country.factions[faction].name).append("<ul id='support'><b>Support</b><ul/>")
+		$("#politics > #" + this.country.factions[faction].name +" > #support").append("<li>"+ this.country.factions[faction].getDescriptiveStat("support")+"</li>").attr("title", "Support is how").attr("title", "Support is how much the faction supports you government. "+
+		"High support means the faction will help you while low means they will try to weaken you.")
+	}
+	
+	for (var relations in this.country.diplomacy){
+		$("#diplomacy").append("<ul id=" + relations + "><h3>" + relations + "</h3></ul>")
+		$("#diplomacy > #" + relations).append("<li id='relations'>" + this.country.diplomacy[relations].getDescriptiveRelations("relations") + "</li>").attr('title',(this.country.diplomacy[relations].description))
+		}
+		
+	for (var security in this.country.security){
+		$("#security").append("<ul id=" + security + "><h3>" + security.charAt(0).toUpperCase() + security.replace('_', ' ').substr(1) + "</h3></ul>")
+		$("#security > #" + security).attr('title', this.country.security[security].description)
+			.append("<ul id='quality'><b>Quality</b></ul>")
+			.append("<ul id='reliability'><b>Reliability</b></ul>")
+		$("#security > #" + security + " > #quality").append("<li>" + this.country.security[security].getDescriptiveStat("quality") + "</li>").attr("How effective your security apparatus is at keeping your country safe.")
+		$("#security > #" + security + " > #reliability").append("<li>" + this.country.security[security].getDescriptiveStat("reliability") + "</li>").attr("How politically reliable and loyal your security apparatus is.")
+		}
+	
+	return this;
 }
-
-var Faction = function(power, support){
+//Country constructor
+var Country = function(){
+	//Converts the numeric value of a stat to a descriptive form.
+	var getDescriptiveStat = function(statName){
+		var value = this[statName]
+		if (value >= 0 && value < 20)
+		return "Terrible"
+		if (value >= 20 && value < 40)
+		return "Poor"
+		if (value >= 40 && value < 60)
+		return "Adequate"
+		if (value >= 60 && value < 80)
+		return "Good"
+		if (value >= 80 && value < 100)
+		return "Excellent"
+	}
+	
+	this.economy = {
+		growth : {value: 50, description : "How much your economy is growing. Pretty much everyone likes it when the economy is growing.", getDescriptiveStat: getDescriptiveStat},
+		infrastructure : {value : 50, description : "The quality of the infrastructure (roads, water and elecrical utilities, irrigation, etc.) in your country. Sufficient infrastructure is very important for a good ecnomy.", getDescriptiveStat: getDescriptiveStat},
+		food : {value: 50, description: "Your country's access to sufficient food to feed it's population. A lack of food causes enormous social disruption.", getDescriptiveStat: getDescriptiveStat},
+		medicalcare : {value: 50, description: "The citizen's access to sufficient, high quality medical care. Good medical care keeps the population happy and healthy.", getDescriptiveStat: getDescriptiveStat},
+		education : {value: 50, description : "Your people's access to education and training. A highly educated population is the most important part of a strong economy, but the educated often agitate for various reforms.", getDescriptiveStat: getDescriptiveStat}
+	}
+	
+	this.factions = 
+	[
+	new Faction('Militarists', "Represents the military and 'hawkish' elements of civil society. Favors strengthening the military and flexing your muscles.", 50, 50),
+	new Faction('Nationalists', "Represents the fervent patriots in your country. They like anything that makes their country look impressive and powerful, and hate it when you let yourself get pushed around by foreigners.", 50, 50),
+	new Faction('Industrialists', "Represents the business and entrepreneurial parts of the nation. Favors anything that makes them richer, whether it's good economic conditions conductive to growth or blatant bribery.", 50, 50),
+	new Faction('Religious', "Represents the most fervent religious believers in your nation. They are socially conservative and strongly prefer preferential treatment.", 50, 50),
+	new Faction('Socialists', "Represents those who seek economic equality through government control of economic activities. Supports strong government and wealth distribution.", 50, 50),
+	new Faction('Communists', "Represents those supporters of international revolution.  Their biggest concern is friendship with the Soviet Union and opposition to the US and capitalism.", 50, 50),
+	new Faction('Capitalists', "Represents those supporters of free markets and free elections. They want good relations with the United States and opposition to the USSR and international communism", 50, 50)
+	]
+	
+	var getDescriptiveRelations = function(statName){
+		var value = this[statName]
+		if (value >= 0 && value < 20)
+		return "Hostile"
+		if (value >= 20 && value < 40)
+		return "Cold"
+		if (value >= 40 && value < 60)
+		return "Cordial"
+		if (value >= 60 && value < 80)
+		return "Warm"
+		if (value >= 80 && value < 100)
+		return "Close"
+	}
+	
+	this.diplomacy = {
+		US : {relations: 0, description: "Your relations with the United States. The US likes to support democratic, capitalist regimes but cares most about anti-Communism.", getDescriptiveRelations: getDescriptiveRelations},
+		USSR : {relations: 0, description: "Your relations with the Soviet Union. The USSR likes to support non-capitalist regimes who don't get along with the west but cares most about spreading Revolution.", getDescriptiveRelations: getDescriptiveRelations}
+	}
+	
+	this.security = {
+		military : {quality:0, reliability:0, description: "Your military protects your country from foreign attack.", getDescriptiveStat : getDescriptiveStat},
+		police : {quality:0, reliability:0, description: "Your national police are your primary tool to combat insurgency within your country.", getDescriptiveStat : getDescriptiveStat},
+		intelligence_services : {quality: 0, reliability: 0, description : "Your intelligence services are your primary defense against infiltration by foreign spies.", getDescriptiveStat : getDescriptiveStat}
+	}
+	
+	this.modifiers = []
+}
+//Faction constructor
+var Faction = function(name, description, power, support){
+	this.name = name;
+	this.description = description;
 	this.power= power,
 	this.support= support
-}
-
-var Message = function(title, body, isSecret, options, game){
-	if (typeof Message.prototype.counter === 'undefined')
-		Message.prototype.counter = 0;
-	else
-		Message.prototype.counter++;
-	this.id = Message.prototype.counter
-	this.isSecret = isSecret;
-	this.title = title,
-	this.body = body
-	this.options = options
-	this.delete = function(){
-		for (var message in game["messages"]){
-			if (game["messages"][message].id === this.id){
-				game["messages"].splice(message, 1)
-				$("#messages").trigger('messages_changed')
-			}
-		}
-	}
-}
-
-var MessageOption = function(description, effects, acceptMessage){
-	this.description = description;
-	this.effects= effects
-	this.acceptMessage = acceptMessage;
-	
-	this.apply = function(country){
-		for (var stat in effects){
-			if (typeof country[stat] !== 'undefined'){
-				country[stat] += effects[stat]
-				$().trigger("stats changed")
-			} else {
-				country["modifiers"][stat] = effects[stat]
-			}
-		}
+	this.getDescriptiveStat = function(statName){
+		var value = this[statName];
+		if (value >= 0 && value < 20)
+		return "Pathetic"
+		if (value >= 20 && value < 40)
+		return "Weak"
+		if (value >= 40 && value < 60)
+		return "Mediocre"
+		if (value >= 60 && value < 80)
+		return "Adequate"
+		if (value >= 0 && value < 20)
+		return "Strong"
 	}
 }
 
 var SecurityService = function(quality, reliability){
 	this.quality = quality,
 	this.reliability = reliability
-}
-
-var initialize = (function(){
-	var game = new Game()
-	var variance = 2;
-	var mod = 0;
-	var stat = generateRandomStats(mod, variance)
-	game.country["growth"] = stat;
-	mod += stat;
-	stat = generateRandomStats(mod, variance)
-	game.country["infrastructure"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["food"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["medicalcare"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["education"] = stat
-	
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["militarists_power"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["militarists_support"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["industrialists_power"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["industrialists_support"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["religious_power"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["religious_support"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["socialists_power"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["socialists_support"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["intellectuals_power"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["intellectuals_support"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["capitalists_power"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["capitalists_support"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["communists_power"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["communists_support"] = stat
-	
-	mod += stat
-	stat = 0
-	game.country["usopinion"] = stat
-	mod += stat
-	stat = 0
-	game.country["ussropinion"] = stat
-	
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["military_quality"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["military_reliability"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["police_quality"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["police_reliability"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["intelligence_service_quality"] = stat
-	mod += stat
-	stat = generateRandomStats(mod, variance)
-	game.country["intelligence_service_reliability"] = stat
-	
-	game.messages = [new Message("Americans", "This is a Test Message about Americans", [new MessageOption("Click this to increase your US Opinion", {"usopinion": 1}, "The US appreciates your aid in the fight against Communism")], game),
-	new Message("Russians", "This is a Test Message about Russians", [new MessageOption("Click this to increase your USSR Opinion", {"ussropinion": 1}, "The USSR appreciates your help in the fight against Imperialism")], game)
-	]
-	
-	loadEvents();
-	
-	return game;
-})
-
-var generateRandomStats = function(modifier, variance){
-	var result = Math.floor((Math.random() * ((2 * variance) + 1)) - variance ) - modifier
-	if (result < -variance){
-		return -variance;
-	} 
-	else if (result > variance){
-		return variance;
-	}
-	else{
-		return result;
-	}
 }
