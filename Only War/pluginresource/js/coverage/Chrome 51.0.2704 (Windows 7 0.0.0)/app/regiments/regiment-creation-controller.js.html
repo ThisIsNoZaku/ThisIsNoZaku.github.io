@@ -1,0 +1,2672 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for app\regiments\regiment-creation-controller.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">app/regiments/</a> regiment-creation-controller.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">2.19% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>9/411</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/234</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">1.22% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/82</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">2.19% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>9/411</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">define(function () {
+    return <span class="fstat-no" title="function not covered" >function ($scope, $state, regimentOptions, regimentProvider, characterService, $q, optionselection, $uibModal, characteroptions, selection) {</span>
+<span class="cstat-no" title="statement not covered" >        var kitChoices;</span>
+&nbsp;
+        /**
+         The chosen elements for regiment creation: the homeworld, commanding officer, regiment type and between 0 and 2
+         special equipment and/or training doctrines.
+&nbsp;
+         The homeworld, commander, type and favored weapons are all required to be selected, and all optional items they
+         define that must be determined at regiment creation time chosen, to complete the regiment.
+         */
+<span class="fstat-no" title="function not covered" >        function regimentElementEntry() {</span>
+<span class="cstat-no" title="statement not covered" >            this.header = "Please Wait...";</span>
+<span class="cstat-no" title="statement not covered" >            this._selected = null;</span>
+        };
+<span class="cstat-no" title="statement not covered" >        regimentElementEntry.prototype = {</span>
+            set selected<span class="fstat-no" title="function not covered" >(value) {</span>
+<span class="cstat-no" title="statement not covered" >                this._selected = angular.copy(value);</span>
+<span class="cstat-no" title="statement not covered" >                if (value) {</span>
+<span class="cstat-no" title="statement not covered" >                    switch (value.name) {</span>
+                        case "Hardened Fighters":
+                        {
+<span class="cstat-no" title="statement not covered" >                            selection.selectionObject = {</span>
+                                selections: 1,
+                                options: [
+                                    {
+                                        "index": 0,
+                                        "description": "Replace standard melee weapon with a Common or more Availability melee weapon"
+                                    },
+                                    {
+                                        "index": 1,
+                                        "description": "Upgrade standard melee weapon with the Mono upgrade"
+                                    }
+                                ]
+                            };
+<span class="cstat-no" title="statement not covered" >                            $uibModal.open({</span>
+                                controller: "SelectionModalController",
+                                templateUrl: "pluginresource/templates/selection-modal.html"
+                            }).result.then(<span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >                                var result = selection.selected[0];</span>
+<span class="cstat-no" title="statement not covered" >                                switch (result.index) {</span>
+                                    case 0:
+                                        //Choose one Melee weapon of Common or higher availability.
+<span class="cstat-no" title="statement not covered" >                                        selection.selectionObject = {</span>
+                                            selections: 1,
+                                            options: $scope.equipment.weapons.filter(<span class="fstat-no" title="function not covered" >function (weapon) {</span>
+<span class="cstat-no" title="statement not covered" >                                                return weapon.class === "Melee"</span>
+                                                    &amp;&amp; (weapon.availability === "Common"
+                                                    || weapon.availability == "Plentiful"
+                                                    || weapon.availability == "Abundant"
+                                                    || weapon.availability == "Ubiquitous")
+                                            }).map(<span class="fstat-no" title="function not covered" >function (weapon) {</span>
+<span class="cstat-no" title="statement not covered" >                                                return {</span>
+                                                    weapon: weapon,
+                                                    description: weapon.name
+                                                }
+                                            })
+                                        };
+<span class="cstat-no" title="statement not covered" >                                        $uibModal.open({</span>
+                                            controller: "SelectionModalController",
+                                            templateUrl: "pluginresource/templates/selection-modal.html"
+                                        }).result.then(<span class="fstat-no" title="function not covered" >function () {</span>
+                                            //Add selected melee weapon, laspistol + 2 charg packs as main weapons
+<span class="cstat-no" title="statement not covered" >                                            selection.selected[0]['main weapon'] = true;</span>
+<span class="cstat-no" title="statement not covered" >                                            var additions = [</span>
+                                                {
+                                                    count: 1,
+                                                    item: $scope.equipment.weapons.find(<span class="fstat-no" title="function not covered" >function (weapon) {</span>
+<span class="cstat-no" title="statement not covered" >                                                        return weapon.name == "Laspistol"</span>
+                                                    })
+                                                },
+                                                {
+                                                    count: 1,
+                                                    item: $scope.equipment.items.find(<span class="fstat-no" title="function not covered" >function (item) {</span>
+<span class="cstat-no" title="statement not covered" >                                                        return item.name == "Charge Pack (Pistol)"</span>
+                                                    })
+                                                },
+                                                {
+                                                    count: 1,
+                                                    item: selection.selected[0]
+                                                }
+                                            ].forEach(<span class="fstat-no" title="function not covered" >function (item) {</span>
+<span class="cstat-no" title="statement not covered" >                                                item['main weapon'] = true;</span>
+                                            })
+<span class="cstat-no" title="statement not covered" >                                            $regiment['fixed modifiers']['character kit']</span>
+                                                = $regiment['fixed modifiers']['character kit'].filter(<span class="fstat-no" title="function not covered" >function (item) {</span>
+<span class="cstat-no" title="statement not covered" >                                                return !item['main weapon'];</span>
+                                            }).concat(additions);
+                                        });
+<span class="cstat-no" title="statement not covered" >                                        break;</span>
+                                    case 1:
+<span class="cstat-no" title="statement not covered" >                                        var standardMeleeWeapon = $scope.regiment['fixed modifiers']['character kit'].find(<span class="fstat-no" title="function not covered" >function (item) {</span></span>
+<span class="cstat-no" title="statement not covered" >                                            return item['standard melee weapon'];</span>
+                                        });
+<span class="cstat-no" title="statement not covered" >                                        if (!standardMeleeWeapon.item.upgrades) {</span>
+<span class="cstat-no" title="statement not covered" >                                            standardMeleeWeapon.item.upgrades = [];</span>
+                                        }
+<span class="cstat-no" title="statement not covered" >                                        standardMeleeWeapon.item.upgrades.push("Mono");</span>
+<span class="cstat-no" title="statement not covered" >                                        break;</span>
+                                }
+                            });
+<span class="cstat-no" title="statement not covered" >                            break;</span>
+                        }
+                        case "Warrior Weapons":
+                        {
+<span class="cstat-no" title="statement not covered" >                            selection.selectionObject = {</span>
+                                selections: 1,
+                                options: $scope.equipment.weapons.filter(<span class="fstat-no" title="function not covered" >function (weapon) {</span>
+<span class="cstat-no" title="statement not covered" >                                    return weapon.class === "Low-Tech"</span>
+                                        &amp;&amp; (weapon.availability === "Common"
+                                        || weapon.availability == "Plentiful"
+                                        || weapon.availability == "Abundant"
+                                        || weapon.availability == "Ubiquitous")
+                                })
+                            };
+<span class="cstat-no" title="statement not covered" >                            $uibModal.open({</span>
+                                controller: "SelectionModalController",
+                                templateUrl: "pluginresource/templates/selection-modal.html"
+                            }).result.then(<span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >                                value;</span>
+                            });
+                        }
+                    }
+<span class="cstat-no" title="statement not covered" >                    reapplyModifiers()</span>
+                }
+            },
+            get selected<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >                return this._selected;</span>
+            }
+        };
+<span class="cstat-no" title="statement not covered" >        $scope.regimentElements = {</span>
+            homeworld: new regimentElementEntry(),
+            commander: new regimentElementEntry(),
+            type: new regimentElementEntry(),
+            doctrine1: new regimentElementEntry(),
+            doctrine2: new regimentElementEntry()
+        }
+<span class="cstat-no" title="statement not covered" >        $q.all({'character options': characteroptions, 'regiment options': regimentOptions}).then(<span class="fstat-no" title="function not covered" >function (results) {</span></span>
+<span class="cstat-no" title="statement not covered" >            $scope.equipment = results['character options'];</span>
+<span class="cstat-no" title="statement not covered" >            $scope.basicWeapons = results['character options'].weapons.filter(<span class="fstat-no" title="function not covered" >function (weapon) {</span></span>
+<span class="cstat-no" title="statement not covered" >                var availability = false;</span>
+<span class="cstat-no" title="statement not covered" >                switch (weapon.availability) {</span>
+                    case "Ubiquitous":
+                    case "Abundant":
+                    case "Plentiful":
+                    case "Common":
+                    case "Average":
+                    case "Scarce":
+                    case "Rare":
+                    case "Very Rare":
+<span class="cstat-no" title="statement not covered" >                        availability = true;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                return weapon.class == "Basic" &amp;&amp; availability;</span>
+            });
+<span class="cstat-no" title="statement not covered" >            $scope.heavyWeapons = results['character options'].weapons.filter(<span class="fstat-no" title="function not covered" >function (weapon) {</span></span>
+<span class="cstat-no" title="statement not covered" >                var availability = false;</span>
+<span class="cstat-no" title="statement not covered" >                switch (weapon.availability) {</span>
+                    case "Ubiquitous":
+                    case "Abundant":
+                    case "Plentiful":
+                    case "Common":
+                    case "Average":
+                    case "Scarce":
+                    case "Rare":
+                    case "Very Rare":
+<span class="cstat-no" title="statement not covered" >                        availability = true;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                return weapon.class == "Heavy" &amp;&amp; availability;</span>
+            });
+<span class="cstat-no" title="statement not covered" >            $scope.regimentKit = results['regiment options'].standardRegimentalKit['fixed modifiers']['character kit'];</span>
+<span class="cstat-no" title="statement not covered" >            kitChoices = angular.copy(results["additional kit choices"]);</span>
+<span class="cstat-no" title="statement not covered" >            $.each(kitChoices, <span class="fstat-no" title="function not covered" >function (i, choice) {</span></span>
+<span class="cstat-no" title="statement not covered" >                switch (choice.effect.type) {</span>
+                    case "Add":
+                    case "Replace":
+                    {
+<span class="cstat-no" title="statement not covered" >                        $.each(choice.effect.results, <span class="fstat-no" title="function not covered" >function (i, result) {</span></span>
+<span class="cstat-no" title="statement not covered" >                            var placeholder = angular.copy(result);</span>
+<span class="cstat-no" title="statement not covered" >                            result.item = results['character options'].weapons.find(<span class="fstat-no" title="function not covered" >function (item) {</span></span>
+<span class="cstat-no" title="statement not covered" >                                for (var property in placeholder.item) {</span>
+<span class="cstat-no" title="statement not covered" >                                    if (item[property] !== placeholder.item[property]) {</span>
+<span class="cstat-no" title="statement not covered" >                                        return false;</span>
+                                    }
+                                }
+<span class="cstat-no" title="statement not covered" >                                return true;</span>
+                            });
+<span class="cstat-no" title="statement not covered" >                            if (!result.item) {</span>
+<span class="cstat-no" title="statement not covered" >                                result.item = results['character options'].items.find(<span class="fstat-no" title="function not covered" >function (item) {</span></span>
+<span class="cstat-no" title="statement not covered" >                                    for (var property in placeholder.item) {</span>
+<span class="cstat-no" title="statement not covered" >                                        if (item[property] !== placeholder.item[property]) {</span>
+<span class="cstat-no" title="statement not covered" >                                            return false;</span>
+                                        }
+                                    }
+<span class="cstat-no" title="statement not covered" >                                    return true;</span>
+                                });
+                            }
+<span class="cstat-no" title="statement not covered" >                            if (!result.item) {</span>
+<span class="cstat-no" title="statement not covered" >                                result.item = results['character options'].armor.find(<span class="fstat-no" title="function not covered" >function (item) {</span></span>
+<span class="cstat-no" title="statement not covered" >                                    for (var property in placeholder.item) {</span>
+<span class="cstat-no" title="statement not covered" >                                        if (item[property] !== placeholder.item[property]) {</span>
+<span class="cstat-no" title="statement not covered" >                                            return false;</span>
+                                        }
+                                    }
+<span class="cstat-no" title="statement not covered" >                                    return true;</span>
+                                });
+                            }
+                        });
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    }
+                    case "AddAvailability":
+                    {
+<span class="cstat-no" title="statement not covered" >                        var targetAvailability = choice.effect.target;</span>
+<span class="cstat-no" title="statement not covered" >                        var options = results['character options']['items']</span>
+                            .filter(<span class="fstat-no" title="function not covered" >function (item) {</span>
+<span class="cstat-no" title="statement not covered" >                                return item.availability === targetAvailability;</span>
+                            }).map(<span class="fstat-no" title="function not covered" >function (item) {</span>
+<span class="cstat-no" title="statement not covered" >                                return {</span>
+                                    value: {
+                                        item: item,
+                                        count: 1
+                                    }
+                                }
+                            });
+<span class="cstat-no" title="statement not covered" >                        choice.effect.target = "other gear";</span>
+<span class="cstat-no" title="statement not covered" >                        choice.effect.results = options;</span>
+                    }
+                }
+            });
+<span class="cstat-no" title="statement not covered" >            $scope.regiment = new createdRegiment();</span>
+<span class="cstat-no" title="statement not covered" >            updateAvailableKitChoices();</span>
+<span class="cstat-no" title="statement not covered" >            for (var section in $scope.regimentElements) {</span>
+<span class="cstat-no" title="statement not covered" >                switch (section) {</span>
+                    case "homeworld":
+<span class="cstat-no" title="statement not covered" >                        $scope.regimentElements[section].options = results['regiment options']["origins"];</span>
+<span class="cstat-no" title="statement not covered" >                        $scope.regimentElements[section].header = "Homeworld/Origin"</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case "commander":
+<span class="cstat-no" title="statement not covered" >                        $scope.regimentElements[section].options = results['regiment options']["officers"];</span>
+<span class="cstat-no" title="statement not covered" >                        $scope.regimentElements[section].header = "Commanding Officer"</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case "type":
+<span class="cstat-no" title="statement not covered" >                        $scope.regimentElements[section].options = results['regiment options']["types"];</span>
+<span class="cstat-no" title="statement not covered" >                        $scope.regimentElements[section].header = "Regiment ItemType"</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case "doctrine1":
+                    case "doctrine2":
+<span class="cstat-no" title="statement not covered" >                        $scope.regimentElements[section].options = results['regiment options'].equipmentDoctrines.concat(results['regiment options'].trainingDoctrines);</span>
+<span class="cstat-no" title="statement not covered" >                        $scope.regimentElements[section].header = "Special Equipment/Training Doctrine"</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+&nbsp;
+                }
+            }
+            ;
+<span class="cstat-no" title="statement not covered" >            reapplyModifiers();</span>
+        });
+&nbsp;
+        /**
+         Determines the availability of each of the regimental kit modifier choices, based on the current state of the
+         regiment.
+&nbsp;
+         Choices may be limited to being selected a maximum number of times, require the kit to already contain an item
+         matching certain properties or require certain regiment creation options to be selected.
+&nbsp;
+         When an item is unavailable, a message is attached to it describing why it is unavailable. Multiple such messages
+         may be present if there are multiple reasons it is unavailable. These messages are displayed in the front end as
+         tooltips.
+         */
+<span class="fstat-no" title="function not covered" >        function updateAvailableKitChoices() {</span>
+<span class="cstat-no" title="statement not covered" >            regimentOptions.then(<span class="fstat-no" title="function not covered" >function (regimentOptions) {</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                $scope.kitChoices = angular.copy(regimentOptions.additionalKitChoices.map(<span class="fstat-no" title="function not covered" >function (choice) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    choice.unavailableMessage = undefined;</span>
+<span class="cstat-no" title="statement not covered" >                    if (choice.cost &gt; $scope.regiment.remainingKitPoints) {</span>
+<span class="cstat-no" title="statement not covered" >                        if (!choice.unavailableMessage) {</span>
+<span class="cstat-no" title="statement not covered" >                            choice.unavailableMessage = "";</span>
+                        }
+<span class="cstat-no" title="statement not covered" >                        choice.unavailableMessage += "\nRequires " + choice.cost + " points but only " + $scope.regiment.remainingKitPoints + " available."</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    var timesSelected = 0;</span>
+<span class="cstat-no" title="statement not covered" >                    if ($scope.kitChoices) {</span>
+<span class="cstat-no" title="statement not covered" >                        timesSelected = $scope.chosenKitModifiers.filter(<span class="fstat-no" title="function not covered" >function (previousChoice) {</span></span>
+<span class="cstat-no" title="statement not covered" >                            return previousChoice.description === choice.description;</span>
+                        }).length;
+                    }
+<span class="cstat-no" title="statement not covered" >                    if (choice.limits) {</span>
+<span class="cstat-no" title="statement not covered" >                        if (choice.limits.maxSelectCount &amp;&amp; choice.limits.maxSelectCount &lt;= timesSelected) {</span>
+<span class="cstat-no" title="statement not covered" >                            if (!choice.unavailableMessage) {</span>
+<span class="cstat-no" title="statement not covered" >                                choice.unavailableMessage = "";</span>
+                            }
+<span class="cstat-no" title="statement not covered" >                            choice.unavailableMessage += "\nAlready selected the maximum number of times."</span>
+                        }
+<span class="cstat-no" title="statement not covered" >                        if (choice.limits.regiment) {</span>
+<span class="cstat-no" title="statement not covered" >                            if (choice.limits.regiment.type) {</span>
+<span class="cstat-no" title="statement not covered" >                                if (!$scope.regimentElements.type.selected || choice.limits.regiment.type.indexOf($scope.regimentElements.type.selected.name) === -1) {</span>
+<span class="cstat-no" title="statement not covered" >                                    if (!choice.unavailableMessage) {</span>
+<span class="cstat-no" title="statement not covered" >                                        choice.unavailableMessage = "";</span>
+                                    }
+<span class="cstat-no" title="statement not covered" >                                    if (choice.limits.regiment.type.length &gt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >                                        var requiredChoices = choice.limits.regiment.type.slice(0, choice.limits.regiment.type.length - 1).join(', ');</span>
+<span class="cstat-no" title="statement not covered" >                                        requiredChoices += (" or " + choice.limits.regiment.type[choice.limits.regiment.type.length - 1]);</span>
+                                    } else {
+<span class="cstat-no" title="statement not covered" >                                        var requiredChoices = choice.limits.regiment.type[0];</span>
+                                    }
+<span class="cstat-no" title="statement not covered" >                                    choice.unavailableMessage += "\nRequires Regiment ItemType to be " + requiredChoices + ".";</span>
+                                }
+                            }
+<span class="cstat-no" title="statement not covered" >                            if (choice.limits.regiment.commander) {</span>
+<span class="cstat-no" title="statement not covered" >                                if (!$scope.regimentElements.commander.selected || $scope.regimentElements.commander.selected.name !== choice.limits.regiment.commander) {</span>
+<span class="cstat-no" title="statement not covered" >                                    if (!choice.unavailableMessage) {</span>
+<span class="cstat-no" title="statement not covered" >                                        choice.unavailableMessage = "";</span>
+                                    }
+<span class="cstat-no" title="statement not covered" >                                    var requiredChoices = choice.limits.regiment.commander.slice(0, choice.limits.regiment.type.length).join(', ');</span>
+<span class="cstat-no" title="statement not covered" >                                    requiredChoices += " or " + choice.limits.regiment.commander[choice.limits.regiment.commander.length];</span>
+<span class="cstat-no" title="statement not covered" >                                    choice.unavailableMessage += "\nRequires Commander to be " + requiredChoices + " but is " + $scope.regimentElements.commander.selected.name + ".";</span>
+                                }
+                            }
+<span class="cstat-no" title="statement not covered" >                            if (choice.limits.regiment.homeworld) {</span>
+<span class="cstat-no" title="statement not covered" >                                if (!$scope.regimentElements.homeworld.selected || $scope.regimentElements.homeworld.selected.name !== choice.limits.regiment.homeworld) {</span>
+<span class="cstat-no" title="statement not covered" >                                    if (!choice.unavailableMessage) {</span>
+<span class="cstat-no" title="statement not covered" >                                        choice.unavailableMessage = "";</span>
+                                    }
+<span class="cstat-no" title="statement not covered" >                                    var requiredChoices = choice.limits.regiment.homeworld.slice(0, choice.limits.regiment.type.length).join(', ');</span>
+<span class="cstat-no" title="statement not covered" >                                    requiredChoices += " or " + choice.limits.regiment.homeworld[choice.limits.regiment.homeworld.length];</span>
+<span class="cstat-no" title="statement not covered" >                                    choice.unavailableMessage += "\nRequires Homeworld/Origin to be " + requiredChoices + " but is " + $scope.regimentElements.homeworld.selected.name + ".";</span>
+                                }
+                            }
+<span class="cstat-no" title="statement not covered" >                            if (choice.limits.regiment.doctrine) {</span>
+<span class="cstat-no" title="statement not covered" >                                var combinedDoctrines = [$scope.regimentElements.doctrine1.selected, $scope.regimentElements.doctrine2.selected];</span>
+<span class="cstat-no" title="statement not covered" >                                if (combinedDoctrines.length == 0 || combinedDoctrines.find(<span class="fstat-no" title="function not covered" >function (doctrine) {</span></span>
+<span class="cstat-no" title="statement not covered" >                                        return doctrine != null &amp;&amp; choice.limits.regiment.doctrine.indexOf(doctrine.name) !== -1;</span>
+                                    })) {
+<span class="cstat-no" title="statement not covered" >                                    if (!choice.unavailableMessage) {</span>
+<span class="cstat-no" title="statement not covered" >                                        choice.unavailableMessage = "";</span>
+                                    }
+<span class="cstat-no" title="statement not covered" >                                    var requiredChoices = choice.limits.regiment.doctrine.slice(0, choice.limits.regiment.doctrine.length).join(', ');</span>
+<span class="cstat-no" title="statement not covered" >                                    requiredChoices += (" or " + choice.limits.regiment.doctrine[choice.limits.regiment.doctrine.length]);</span>
+<span class="cstat-no" title="statement not covered" >                                    choice.unavailableMessage += "\nRequires Doctrine " + requiredChoices + ".";</span>
+                                }
+                            }
+                        }
+                    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    var equipment = $scope.regiment['fixed modifiers']['character kit'];</span>
+&nbsp;
+                    //Iterate over the kit choices
+<span class="cstat-no" title="statement not covered" >                    var potentialMessage = "";</span>
+<span class="cstat-no" title="statement not covered" >                    var atLeastOneTargetExists = false;</span>
+                    //Upgrade and Replace are only available if there is an item they can affect in the kit
+<span class="cstat-no" title="statement not covered" >                    if (choice.effect.type == "Upgrade" || choice.effect.type == "Replace") {</span>
+<span class="cstat-no" title="statement not covered" >                        var targetExists = false;</span>
+                        //Iterate to find possible target items
+<span class="cstat-no" title="statement not covered" >                        $.each(choice.effect.target, <span class="fstat-no" title="function not covered" >function (i, target) {</span></span>
+                            //Test each item against the effect target.
+<span class="cstat-no" title="statement not covered" >                            $.each(equipment, <span class="fstat-no" title="function not covered" >function (i, item) {</span></span>
+<span class="cstat-no" title="statement not covered" >                                targetExists = testItemMatchesTarget(item.item, target);</span>
+                                //Continue iteration if no match found yet.
+<span class="cstat-no" title="statement not covered" >                                return !targetExists;</span>
+                            });
+                            //Stop iterating if any of the effects can be applied
+<span class="cstat-no" title="statement not covered" >                            return !targetExists;</span>
+                        });
+                        //If no targets were found, add to the possible error string.
+<span class="cstat-no" title="statement not covered" >                        if (!targetExists) {</span>
+<span class="cstat-no" title="statement not covered" >                            var message = "item with ";</span>
+<span class="cstat-no" title="statement not covered" >                            $.each(choice.effect.target, <span class="fstat-no" title="function not covered" >function (i, target) {</span></span>
+<span class="cstat-no" title="statement not covered" >                                for (var property in target) {</span>
+<span class="cstat-no" title="statement not covered" >                                    message += property + ": " + target[property] + ". ";</span>
+                                }
+                            });
+<span class="cstat-no" title="statement not covered" >                            potentialMessage += "\nRequires " + message;</span>
+                        } else {
+<span class="cstat-no" title="statement not covered" >                            atLeastOneTargetExists = true;</span>
+                        }
+<span class="cstat-no" title="statement not covered" >                        if (!atLeastOneTargetExists) {</span>
+<span class="cstat-no" title="statement not covered" >                            if (!choice.unavailableMessage) {</span>
+<span class="cstat-no" title="statement not covered" >                                choice.unavailableMessage = ""</span>
+                            }
+<span class="cstat-no" title="statement not covered" >                            choice.unavailableMessage += "\n" + potentialMessage;</span>
+                        }
+                    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    return choice;</span>
+                }));
+            });
+        };
+        /**
+         Contains all of the kit modifier choices that have already been selected by the user and applied.
+         */
+<span class="cstat-no" title="statement not covered" >        $scope.chosenKitModifiers = [];</span>
+<span class="cstat-no" title="statement not covered" >        $scope.readyToSelectKitModifiers = false;</span>
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function reapplyModifiers() {</span>
+<span class="cstat-no" title="statement not covered" >            var favoredWeapons = $scope.regiment['fixed modifiers']['favored weapons'];</span>
+<span class="cstat-no" title="statement not covered" >            $scope.regiment = new createdRegiment();</span>
+<span class="cstat-no" title="statement not covered" >            $scope.regiment['fixed modifiers']['favored weapons'] = favoredWeapons;</span>
+<span class="cstat-no" title="statement not covered" >            for (var regimentModifierSection in $scope.regimentElements) {</span>
+<span class="cstat-no" title="statement not covered" >                if ($scope.regimentElements[regimentModifierSection].selected) {</span>
+<span class="cstat-no" title="statement not covered" >                    $scope.regiment.remainingRegimentPoints -= $scope.regimentElements[regimentModifierSection].selected.cost;</span>
+<span class="cstat-no" title="statement not covered" >                    $scope.regiment.addModifier($scope.regimentElements[regimentModifierSection].selected);</span>
+                }
+            }
+<span class="cstat-no" title="statement not covered" >            $scope.readyToSelectEquipment = $scope.regimentElements['homeworld'] &amp;&amp;</span>
+                $scope.regimentElements['commander'] &amp;&amp;
+                $scope.regimentElements['type'];
+<span class="cstat-no" title="statement not covered" >            $scope.regiment.remainingKitPoints = 30 + $scope.regiment.remainingRegimentPoints * 2;</span>
+<span class="cstat-no" title="statement not covered" >            $.each($scope.chosenKitModifiers, <span class="fstat-no" title="function not covered" >function (i, chosenModifier) {</span></span>
+<span class="cstat-no" title="statement not covered" >                $scope.applyKitModifier(chosenModifier);</span>
+            });
+<span class="cstat-no" title="statement not covered" >            checkReadyToSelectKitModifiers();</span>
+        }
+&nbsp;
+        /**
+         These watches track the required values for determining when it is possible to complete the creation of the
+         regiment and when the player is allowed to choose kit modifiers.
+         */
+<span class="cstat-no" title="statement not covered" >        $scope.$watchCollection("regiment['fixed modifiers']['favored weapons']", <span class="fstat-no" title="function not covered" >function (newVal, oldVal) {</span></span>
+<span class="cstat-no" title="statement not covered" >            checkReadyToSelectKitModifiers();</span>
+<span class="cstat-no" title="statement not covered" >            isRegimentCreationComplete();</span>
+        });
+<span class="cstat-no" title="statement not covered" >        $scope.$watchCollection("regimentElements.homeworld.selected['optional modifiers']", <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            isRegimentCreationComplete();</span>
+        });
+<span class="cstat-no" title="statement not covered" >        $scope.$watchCollection("regimentElements.commander.selected['optional modifiers']", <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            isRegimentCreationComplete();</span>
+        });
+<span class="cstat-no" title="statement not covered" >        $scope.$watchCollection("regimentElements.type.selected['optional modifiers']", <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            isRegimentCreationComplete();</span>
+        });
+<span class="cstat-no" title="statement not covered" >        $scope.$watch("regiment.name", <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            isRegimentCreationComplete();</span>
+        });
+<span class="cstat-no" title="statement not covered" >        $scope.$watchGroup(["regimentElements.homeworld.selected",</span>
+            "regimentElements.commander.selected",
+            "regimentElements.type.selected"
+        ], <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >            checkReadyToSelectKitModifiers();</span>
+<span class="cstat-no" title="statement not covered" >            isRegimentCreationComplete();</span>
+        });
+<span class="cstat-no" title="statement not covered" >        $scope.$watchGroup(["regimentElements.homeworld.selected",</span>
+            "regimentElements.commander.selected",
+            "regimentElements.type.selected",
+            "regimentElements.doctrine1",
+            "regimentElements.doctrine2"
+        ], <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >            $scope.chosenKitModifiers = $scope.chosenKitModifiers.filter(<span class="fstat-no" title="function not covered" >function (choice) {</span></span>
+<span class="cstat-no" title="statement not covered" >                return choice.type !== "Replace" &amp;&amp; choice.type !== "Upgrade";</span>
+            });
+        });
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function checkReadyToSelectKitModifiers() {</span>
+<span class="cstat-no" title="statement not covered" >            if ($scope.regiment) {</span>
+<span class="cstat-no" title="statement not covered" >                var ready = $scope.regimentElements.homeworld.selected !== null;</span>
+<span class="cstat-no" title="statement not covered" >                ready = $scope.regimentElements.commander.selected !== null &amp;&amp; ready;</span>
+<span class="cstat-no" title="statement not covered" >                ready = $scope.regimentElements.type.selected !== null &amp;&amp; ready;</span>
+<span class="cstat-no" title="statement not covered" >                ready = $scope.regiment['fixed modifiers']['favored weapons'].length == 2 &amp;&amp; ready;</span>
+<span class="cstat-no" title="statement not covered" >                $scope.readyToSelectKitModifiers = ready;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if ($scope.readyToSelectEquipment) {</span>
+<span class="cstat-no" title="statement not covered" >                updateAvailableKitChoices();</span>
+            }
+        }
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function isRegimentCreationComplete() {</span>
+<span class="cstat-no" title="statement not covered" >            if ($scope.regiment) {</span>
+                //Regiment is finished if it has a selected homeworld, commander and type, each has no optional modifiers left, and has selected favored weapons and name.
+<span class="cstat-no" title="statement not covered" >                var nameReady = $scope.regiment.name !== undefined;</span>
+<span class="cstat-no" title="statement not covered" >                var homeworldReady = $scope.regimentElements.homeworld.selected &amp;&amp;</span>
+                    (!$scope.regimentElements.homeworld.selected['optional modifiers'] ||
+                    $scope.regimentElements.homeworld.selected['optional modifiers'].filter(<span class="fstat-no" title="function not covered" >function (e) {</span>
+<span class="cstat-no" title="statement not covered" >                        return e['selection time'] === "regiment"</span>
+                    }).length === 0);
+<span class="cstat-no" title="statement not covered" >                var commanderReady = $scope.regimentElements.commander.selected &amp;&amp;</span>
+                    (!$scope.regimentElements.commander.selected['optional modifiers'] ||
+                    $scope.regimentElements.commander.selected['optional modifiers'].filter(<span class="fstat-no" title="function not covered" >function (e) {</span>
+<span class="cstat-no" title="statement not covered" >                        return e['selection time'] === "regiment"</span>
+                    }).length === 0);
+<span class="cstat-no" title="statement not covered" >                var typeReady = $scope.regimentElements.type.selected &amp;&amp;</span>
+                    (!$scope.regimentElements.type.selected['optional modifiers'] ||
+                    $scope.regimentElements.type.selected['optional modifiers'].filter(<span class="fstat-no" title="function not covered" >function (e) {</span>
+<span class="cstat-no" title="statement not covered" >                        return e['selection time'] === "regiment"</span>
+                    }).length === 0);
+<span class="cstat-no" title="statement not covered" >                var favoredWeaponsReady = $scope.regiment['fixed modifiers']['favored weapons'].length === 2;</span>
+<span class="cstat-no" title="statement not covered" >                $scope.isRegimentCreationComplete = homeworldReady &amp;&amp; commanderReady &amp;&amp; typeReady &amp;&amp; favoredWeaponsReady &amp;&amp; nameReady;</span>
+            }
+        }
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function createdRegiment() {</span>
+<span class="cstat-no" title="statement not covered" >            this.isCustom = true;</span>
+<span class="cstat-no" title="statement not covered" >            this['fixed modifiers'] = {</span>
+                'character kit': angular.copy($scope.regimentKit),
+                'favored weapons': []
+            };
+<span class="cstat-no" title="statement not covered" >            this['optional modifiers'] = [];</span>
+<span class="cstat-no" title="statement not covered" >            this.addModifier = <span class="fstat-no" title="function not covered" >function (modifier) {</span></span>
+                //Needed for scoping issues
+<span class="cstat-no" title="statement not covered" >                var regiment = this;</span>
+<span class="cstat-no" title="statement not covered" >                for (var property in modifier['fixed modifiers']) {</span>
+<span class="cstat-no" title="statement not covered" >                    if (modifier['fixed modifiers'].hasOwnProperty(property)) {</span>
+<span class="cstat-no" title="statement not covered" >                        switch (property) {</span>
+                            case "characteristics":
+                            {
+<span class="cstat-no" title="statement not covered" >                                if (!regiment['fixed modifiers'][property]) {</span>
+<span class="cstat-no" title="statement not covered" >                                    regiment['fixed modifiers'].characteristics = {}</span>
+                                }
+<span class="cstat-no" title="statement not covered" >                                for (var characteristic in modifier['fixed modifiers']["characteristics"]) {</span>
+<span class="cstat-no" title="statement not covered" >                                    if (regiment['fixed modifiers'].characteristics[characteristic]) {</span>
+<span class="cstat-no" title="statement not covered" >                                        regiment['fixed modifiers'].characteristics[characteristic] += modifier['fixed modifiers'][property][characteristic];</span>
+                                    } else {
+<span class="cstat-no" title="statement not covered" >                                        regiment['fixed modifiers'].characteristics[characteristic] = modifier['fixed modifiers'][property][characteristic];</span>
+                                    }
+                                }
+<span class="cstat-no" title="statement not covered" >                                break;</span>
+                            }
+                            case "skills":
+                            {
+<span class="cstat-no" title="statement not covered" >                                if (!regiment['fixed modifiers'][property]) {</span>
+<span class="cstat-no" title="statement not covered" >                                    regiment['fixed modifiers'].skills = {};</span>
+                                }
+<span class="cstat-no" title="statement not covered" >                                var incomingSkills = modifier['fixed modifiers']['skills'];</span>
+<span class="cstat-no" title="statement not covered" >                                for (var skill in incomingSkills) {</span>
+<span class="cstat-no" title="statement not covered" >                                    var existingSkill = regiment['fixed modifiers'].skills[skill.name];</span>
+<span class="cstat-no" title="statement not covered" >                                    if (existingSkill) {</span>
+<span class="cstat-no" title="statement not covered" >                                        existingSkill.advancements = existingSkill.advancements() + incomingSkills[skill];</span>
+                                    } else {
+<span class="cstat-no" title="statement not covered" >                                        regiment['fixed modifiers'].skills[skill] = incomingSkills[skill];</span>
+                                    }
+                                }
+<span class="cstat-no" title="statement not covered" >                                break;</span>
+                            }
+                            case "talents":
+                            {
+<span class="cstat-no" title="statement not covered" >                                if (!regiment['fixed modifiers'][property]) {</span>
+<span class="cstat-no" title="statement not covered" >                                    regiment['fixed modifiers'][property] = [];</span>
+                                }
+<span class="cstat-no" title="statement not covered" >                                var incomingTalents = modifier['fixed modifiers']['talents'];</span>
+<span class="cstat-no" title="statement not covered" >                                for (var i = 0; i &lt; incomingTalents.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                                    regiment['fixed modifiers'].talents.push(incomingTalents[i]);</span>
+                                }
+<span class="cstat-no" title="statement not covered" >                                break;</span>
+                            }
+                            case "aptitudes":
+                            {
+<span class="cstat-no" title="statement not covered" >                                if (!regiment['fixed modifiers'][property]) {</span>
+<span class="cstat-no" title="statement not covered" >                                    regiment['fixed modifiers'][property] = [];</span>
+                                }
+<span class="cstat-no" title="statement not covered" >                                var incomingAptitudes = modifier['fixed modifiers']['aptitudes'];</span>
+<span class="cstat-no" title="statement not covered" >                                regiment['fixed modifiers'].aptitudes = regiment['fixed modifiers'].aptitudes.concat(incomingAptitudes);</span>
+<span class="cstat-no" title="statement not covered" >                                break;</span>
+                            }
+                            case "starting power experience":
+                            {
+<span class="cstat-no" title="statement not covered" >                                regiment['fixed modifiers'][property] += modifier['fixed modifiers']['starting power experience'];</span>
+<span class="cstat-no" title="statement not covered" >                                break;</span>
+                            }
+                            case "psy rating":
+                            {
+<span class="cstat-no" title="statement not covered" >                                if (regiment['fixed modifiers'][property]) {</span>
+<span class="cstat-no" title="statement not covered" >                                    console.log(modifier.name + " tried to set the psy rating, but it's already set.")</span>
+                                }
+<span class="cstat-no" title="statement not covered" >                                regiment['fixed modifiers'][property] = modifier['fixed modifiers']['psy rating'];</span>
+<span class="cstat-no" title="statement not covered" >                                break;</span>
+                            }
+                            case "special abilities":
+                            {
+<span class="cstat-no" title="statement not covered" >                                if (regiment['fixed modifiers']['special abilities']) {</span>
+<span class="cstat-no" title="statement not covered" >                                    regiment['fixed modifiers']['special abilities'] = regiment['fixed modifiers']['special abilities'].concat(modifier['fixed modifiers']['special abilities']);</span>
+                                } else {
+<span class="cstat-no" title="statement not covered" >                                    regiment['fixed modifiers']['special abilities'] = modifier['fixed modifiers']['special abilities'];</span>
+                                }
+<span class="cstat-no" title="statement not covered" >                                break;</span>
+                            }
+                            case "character kit":
+                            {
+<span class="cstat-no" title="statement not covered" >                                if (!regiment['fixed modifiers']['character kit']) {</span>
+<span class="cstat-no" title="statement not covered" >                                    regiment['fixed modifiers']['character kit'] = [];</span>
+                                }
+                                ;
+<span class="cstat-no" title="statement not covered" >                                var replacementMainWeapons = modifier['fixed modifiers']['character kit'].filter(<span class="fstat-no" title="function not covered" >function (item) {</span></span>
+<span class="cstat-no" title="statement not covered" >                                    return item['main weapon'];</span>
+                                });
+<span class="cstat-no" title="statement not covered" >                                var replacementArmor = modifier['fixed modifiers']['character kit'].filter(<span class="fstat-no" title="function not covered" >function (item) {</span></span>
+<span class="cstat-no" title="statement not covered" >                                    return item.armor;</span>
+                                });
+<span class="cstat-no" title="statement not covered" >                                var otherItems = modifier['fixed modifiers']['character kit'].filter(<span class="fstat-no" title="function not covered" >function (item) {</span></span>
+<span class="cstat-no" title="statement not covered" >                                    return !item.armor &amp;&amp; !item['main weapon'];</span>
+                                });
+<span class="cstat-no" title="statement not covered" >                                regiment['fixed modifiers']['character kit'] = regiment['fixed modifiers']['character kit'].filter(<span class="fstat-no" title="function not covered" >function (item) {</span></span>
+<span class="cstat-no" title="statement not covered" >                                    return !item.armor &amp;&amp; !item['main weapon'];</span>
+                                });
+<span class="cstat-no" title="statement not covered" >                                if (replacementMainWeapons) {</span>
+<span class="cstat-no" title="statement not covered" >                                    regiment['fixed modifiers']['character kit'] = regiment['fixed modifiers']['character kit']</span>
+                                        .filter(<span class="fstat-no" title="function not covered" >function (item) {</span>
+<span class="cstat-no" title="statement not covered" >                                            return !item['main weapon']</span>
+                                        }).concat(replacementMainWeapons);
+                                }
+<span class="cstat-no" title="statement not covered" >                                if (replacementArmor) {</span>
+<span class="cstat-no" title="statement not covered" >                                    regiment['fixed modifiers']['character kit'] = regiment['fixed modifiers']['character kit']</span>
+                                        .filter(<span class="fstat-no" title="function not covered" >function (item) {</span>
+<span class="cstat-no" title="statement not covered" >                                            return !item.armor</span>
+                                        }).concat(replacementArmor);
+                                }
+<span class="cstat-no" title="statement not covered" >                                var existingItem = regiment['fixed modifiers']['character kit'][category].find(<span class="fstat-no" title="function not covered" >function (item) {</span></span>
+<span class="cstat-no" title="statement not covered" >                                    return angular.equals(element.item, item);</span>
+                                });
+<span class="cstat-no" title="statement not covered" >                                if (existingItem) {</span>
+<span class="cstat-no" title="statement not covered" >                                    element.count++;</span>
+                                } else {
+<span class="cstat-no" title="statement not covered" >                                    regiment['fixed modifiers']['character kit'][category].push(element);</span>
+                                }
+<span class="cstat-no" title="statement not covered" >                                break;</span>
+                            }
+                            case "regiment kit points":
+                            {
+<span class="cstat-no" title="statement not covered" >                                regiment['fixed modifiers'].kitPoints = modifier['fixed modifiers']['regiment kit points'];</span>
+<span class="cstat-no" title="statement not covered" >                                break;</span>
+                            }
+                        }
+                    }
+                }
+<span class="cstat-no" title="statement not covered" >                if (modifier['optional modifiers']) {</span>
+<span class="cstat-no" title="statement not covered" >                    for (var optionalModifier in modifier['optional modifiers'].filter(<span class="fstat-no" title="function not covered" >function (e) {</span></span>
+<span class="cstat-no" title="statement not covered" >                        return e['selection time'] === "regiment"</span>
+                    })) {
+<span class="cstat-no" title="statement not covered" >                        this['optional modifiers'].push(optionalModifier);</span>
+                    }
+                }
+            };
+<span class="cstat-no" title="statement not covered" >            this.remainingRegimentPoints = 12;</span>
+<span class="cstat-no" title="statement not covered" >            this.remainingKitPoints = this['fixed modifiers']['regiment kit points'] ? this['fixed modifiers']['regiment kit points'] : 0 + this.remainingRegimentPoints * 2;</span>
+        };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        $scope.openSelectionModal = <span class="fstat-no" title="function not covered" >function (selectedObject, modifier) {</span></span>
+<span class="cstat-no" title="statement not covered" >            selection.selectionObject = selectedObject;</span>
+<span class="cstat-no" title="statement not covered" >            $uibModal.open({</span>
+                controller: "SelectionModalController",
+                templateUrl: 'pluginresource/templates/selection-modal.html'
+            }).result.then(<span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >                optionselection.target = modifier;</span>
+<span class="cstat-no" title="statement not covered" >                optionselection.selected = selection.selected;</span>
+<span class="cstat-no" title="statement not covered" >                optionselection.selectionObject = selectedObject;</span>
+<span class="cstat-no" title="statement not covered" >                optionselection.associatedService = {</span>
+                    selected: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >                        return modifier;</span>
+                    },
+                    remainingSelections: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >                        return modifier['optional modifiers'];</span>
+                    },
+                    complete: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >                        return modifier &amp;&amp; _remainingSelections.length === 0;</span>
+                    },
+                    select: <span class="fstat-no" title="function not covered" >function (modifier) {</span>
+<span class="cstat-no" title="statement not covered" >                        _selected = angular.copy(modifier);</span>
+                    }
+                };
+<span class="cstat-no" title="statement not covered" >                optionselection.applySelection();</span>
+<span class="cstat-no" title="statement not covered" >                reapplyModifiers();</span>
+            });
+        };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        $scope.finish = <span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >            if ($scope.regiment.remainingRegimentPoints &gt;= 0 &amp;&amp;</span>
+                $scope.regiment.remainingKitPoints &gt;= 0 &amp;&amp;
+                $scope.regimentElements['homeworld'].selected &amp;&amp;
+                $scope.regimentElements['type'].selected &amp;&amp;
+                $scope.regimentElements['commander'].selected
+            ) {
+<span class="cstat-no" title="statement not covered" >                regiments.selected = $scope.regiment;</span>
+<span class="cstat-no" title="statement not covered" >                $state.go("regiment");</span>
+            }
+        };
+&nbsp;
+        //Apply the effects of the given kit modifier to the regimental kit.
+<span class="cstat-no" title="statement not covered" >        $scope.applyKitModifier = <span class="fstat-no" title="function not covered" >function (modifier) {</span></span>
+<span class="cstat-no" title="statement not covered" >            switch (modifier.effect.type) {</span>
+                case "Replace":
+                {
+<span class="cstat-no" title="statement not covered" >                    $.each(modifier.effect.target, <span class="fstat-no" title="function not covered" >function (i, target) {</span></span>
+<span class="cstat-no" title="statement not covered" >                        var targetIndex = target.section.indexOf(target.value);</span>
+<span class="cstat-no" title="statement not covered" >                        target.section.splice(targetIndex, 1);</span>
+<span class="cstat-no" title="statement not covered" >                        $.each(modifier.effect.results, <span class="fstat-no" title="function not covered" >function (i, result) {</span></span>
+<span class="cstat-no" title="statement not covered" >                            target.section.push(result);</span>
+                        });
+                    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+                }
+                case "Upgrade":
+                {
+<span class="cstat-no" title="statement not covered" >                    $.each(modifier.effect.results, <span class="fstat-no" title="function not covered" >function (i, result) {</span></span>
+<span class="cstat-no" title="statement not covered" >                        for (var property in result) {</span>
+<span class="cstat-no" title="statement not covered" >                            modifier.effect.target[i].item.value.item[property] = result[property];</span>
+                        }
+                    });
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+                }
+                case "Add":
+<span class="cstat-no" title="statement not covered" >                    var target = $scope.regiment['fixed modifiers']['character kit'][modifier.effect.target];</span>
+<span class="cstat-no" title="statement not covered" >                    var existingItem;</span>
+<span class="cstat-no" title="statement not covered" >                    $.each(target, <span class="fstat-no" title="function not covered" >function (i, item) {</span></span>
+<span class="cstat-no" title="statement not covered" >                        if (angular.equals(item.item, result.item)) {</span>
+<span class="cstat-no" title="statement not covered" >                            item.count += result.count;</span>
+<span class="cstat-no" title="statement not covered" >                            existingItem = true;</span>
+<span class="cstat-no" title="statement not covered" >                            return false;</span>
+                        }
+                    });
+<span class="cstat-no" title="statement not covered" >                    if (!existingItem) {</span>
+<span class="cstat-no" title="statement not covered" >                        $.each(modifier.effect.results, <span class="fstat-no" title="function not covered" >function (i, result) {</span></span>
+<span class="cstat-no" title="statement not covered" >                            $scope.regiment['fixed modifiers']['character kit'][modifier.effect.target].push(result.value);</span>
+                        })
+                    }
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+                case "AddFavored":
+<span class="cstat-no" title="statement not covered" >                    var favoredWeapon;</span>
+<span class="cstat-no" title="statement not covered" >                    switch (modifier.effect.target) {</span>
+                        case "Basic":
+<span class="cstat-no" title="statement not covered" >                            favoredWeapon = $scope.regiment['fixed modifiers']['favored weapons'][0];</span>
+<span class="cstat-no" title="statement not covered" >                            break;</span>
+                        case "Heavy":
+<span class="cstat-no" title="statement not covered" >                            favoredWeapon = $scope.regiment['fixed modifiers']['favored weapons'][1];</span>
+<span class="cstat-no" title="statement not covered" >                            break;</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    var existingItem = $scope.regiment['fixed modifiers']['character kit']</span>
+                        .find(<span class="fstat-no" title="function not covered" >function (weapon) {</span>
+<span class="cstat-no" title="statement not covered" >                            return angular.equals(weapon, favoredWeapon);</span>
+                        });
+<span class="cstat-no" title="statement not covered" >                    if (existingItem) {</span>
+<span class="cstat-no" title="statement not covered" >                        existingItem.count += 1;</span>
+                    } else {
+<span class="cstat-no" title="statement not covered" >                        $scope.regiment['fixed modifiers']['character kit'].push({</span>
+                            item: favoredWeapon,
+                            count: 1
+                        });
+                    }
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            updateAvailableKitChoices();</span>
+        };
+&nbsp;
+        //Make any selections for the given kit modifier and add it to the chosen modifiers.
+<span class="cstat-no" title="statement not covered" >        $scope.addKitModifier = <span class="fstat-no" title="function not covered" >function (choice) {</span></span>
+            //Chained promises of any opened modal. Later used to proceed once all the modal promises successfully resolve.
+<span class="cstat-no" title="statement not covered" >            var modals;</span>
+            //Array containing all items that are eligible at targets for the effect.
+<span class="cstat-no" title="statement not covered" >            switch (choice.effect.type) {</span>
+                //Replace an object with a completely new item
+                case "Replace":
+                //Replace the properties of an item with those contained in the effect
+                case "Upgrade":
+                {
+<span class="cstat-no" title="statement not covered" >                    var eligibleItems = [];</span>
+                    //Iterate over the items in each of the kit sections and if they match the effect target, add them to the eligible items
+<span class="cstat-no" title="statement not covered" >                    var equipment = $scope.regiment['fixed modifiers']['character kit'];</span>
+<span class="cstat-no" title="statement not covered" >                    for (var i = 0; i &lt; equipment.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                        var meetsCondition = true;</span>
+<span class="cstat-no" title="statement not covered" >                        $.each(choice.effect.target, <span class="fstat-no" title="function not covered" >function (index, target) {</span></span>
+<span class="cstat-no" title="statement not covered" >                            if (!testItemMatchesTarget(equipment[i].item, target)) {</span>
+<span class="cstat-no" title="statement not covered" >                                meetsCondition = false;</span>
+                            }
+                        });
+<span class="cstat-no" title="statement not covered" >                        if (meetsCondition) {</span>
+<span class="cstat-no" title="statement not covered" >                            eligibleItems.push({</span>
+                                "section": $scope.regiment['fixed modifiers']['character kit'],
+                                "value": equipment[i]
+                            });
+                        }
+                    }
+<span class="cstat-no" title="statement not covered" >                    eligibleItems = eligibleItems.map(<span class="fstat-no" title="function not covered" >function (e) {</span></span>
+<span class="cstat-no" title="statement not covered" >                        return {</span>
+                            item: e,
+                            description: e.value.item.name
+                        }
+                    });
+&nbsp;
+                    //Create the selection object with the eligible items
+<span class="cstat-no" title="statement not covered" >                    selection.selectionObject = {</span>
+                        selections: 1,
+                        options: eligibleItems
+                    };
+                    //Open the modal
+<span class="cstat-no" title="statement not covered" >                    var currentModal = $uibModal.open({</span>
+                        controller: "SelectionModalController",
+                        templateUrl: "pluginresource/templates/selection-modal.html"
+                    });
+                    //Chain all the modal results together. This allows waiting for all the modals to complete
+                    //successfully before applying any of their results, in case the user cancels in the middle.
+<span class="cstat-no" title="statement not covered" >                    if (!modals) {</span>
+<span class="cstat-no" title="statement not covered" >                        modals = currentModal.result;</span>
+                    } else {
+<span class="cstat-no" title="statement not covered" >                        modals = modals.then(currentModal.result);</span>
+                    }
+                    //After closing the current modal, add its effect to the effects to be applied at the end.
+<span class="cstat-no" title="statement not covered" >                    currentModal.result.then(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >                        choice.effect.target = selection.selected</span>
+                    });
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+                }
+                //Add one or more new items to the kit
+                case "Add":
+<span class="cstat-no" title="statement not covered" >                    if (!modals) {</span>
+<span class="cstat-no" title="statement not covered" >                        var emptyDeferred = $q.defer();</span>
+<span class="cstat-no" title="statement not covered" >                        emptyDeferred.resolve(null);</span>
+<span class="cstat-no" title="statement not covered" >                        modals = emptyDeferred.promise;</span>
+                    }
+                    ;
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+                //Add an item of a particular availability to the kit
+                case "AddAvailability":
+<span class="cstat-no" title="statement not covered" >                    selection.selectionObject = {</span>
+                        selections: 1,
+                        options: choice.effect.results
+                    };
+<span class="cstat-no" title="statement not covered" >                    choice.effect.type = "Add";</span>
+<span class="cstat-no" title="statement not covered" >                    var currentModal = $uibModal.open({</span>
+                        controller: "SelectionModalController",
+                        templateUrl: "pluginresource/templates/selection-modal.html"
+                    });
+<span class="cstat-no" title="statement not covered" >                    if (!modals) {</span>
+<span class="cstat-no" title="statement not covered" >                        modals = currentModal.result;</span>
+                    } else {
+<span class="cstat-no" title="statement not covered" >                        modals = modals.then(currentModal.result);</span>
+                    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    currentModal.result.then(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >                        choice.effect.results = selection.selected;</span>
+                    });
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+                //Add one of the regiments favored weapons to the kit
+                case "AddFavored":
+<span class="cstat-no" title="statement not covered" >                    var deferred = $q.defer();</span>
+<span class="cstat-no" title="statement not covered" >                    deferred.resolve();</span>
+<span class="cstat-no" title="statement not covered" >                    if (!modals) {</span>
+<span class="cstat-no" title="statement not covered" >                        modals = deferred.promise;</span>
+                    } else {
+<span class="cstat-no" title="statement not covered" >                        modals = modals.then(deferred.promise);</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+            }
+            ;
+            //Application function
+<span class="cstat-no" title="statement not covered" >            modals.then(<span class="fstat-no" title="function not covered" >function (result) {</span></span>
+<span class="cstat-no" title="statement not covered" >                $scope.chosenKitModifiers.push(choice);</span>
+<span class="cstat-no" title="statement not covered" >                choice.timesSelected++;</span>
+<span class="cstat-no" title="statement not covered" >                $scope.regiment.remainingKitPoints -= choice.cost;</span>
+<span class="cstat-no" title="statement not covered" >                $scope.applyKitModifier(choice);</span>
+<span class="cstat-no" title="statement not covered" >                updateAvailableKitChoices();</span>
+            })
+        };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        $scope.removeKitModifier = <span class="fstat-no" title="function not covered" >function (modifier) {</span></span>
+<span class="cstat-no" title="statement not covered" >            $scope.chosenKitModifiers.splice($scope.chosenKitModifiers.indexOf(modifier), 1);</span>
+<span class="cstat-no" title="statement not covered" >            $scope.regiment.remainingKitPoints += modifier.cost;</span>
+<span class="cstat-no" title="statement not covered" >            reapplyModifiers();</span>
+        };
+&nbsp;
+        //See if the properties on the given object match those of the given target object
+<span class="fstat-no" title="function not covered" >        function testItemMatchesTarget(item, target) {</span>
+<span class="cstat-no" title="statement not covered" >            for (var property in target) {</span>
+<span class="cstat-no" title="statement not covered" >                if (item[property] !== target[property]) {</span>
+<span class="cstat-no" title="statement not covered" >                    return false;</span>
+                }
+            }
+<span class="cstat-no" title="statement not covered" >            return true;</span>
+        };
+&nbsp;
+        //Filters creation options so that items with too high a cost are hidden
+<span class="cstat-no" title="statement not covered" >        $scope.costFilter = <span class="fstat-no" title="function not covered" >function (item) {</span></span>
+<span class="cstat-no" title="statement not covered" >            return item.cost &lt;= $scope.regiment.remainingRegimentPoints;</span>
+        }
+    }
+});</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jul 20 2016 13:22:42 GMT-0700 (Pacific Daylight Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

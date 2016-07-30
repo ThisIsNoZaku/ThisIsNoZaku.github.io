@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for app\services\CharacterOptionsService.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">app/services/</a> CharacterOptionsService.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">3.45% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>2/58</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">9.09% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">3.45% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>2/58</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">define(["require", "exports", "../types/character/Characteristic", "../types/character/Talent", "../types/Prerequisite"], function (require, exports, Characteristic_1, Talent_1, Prerequisite_1) {
+    "use strict";
+    /**
+     * Created by Damien on 7/12/2016.
+     */
+    class CharacterOptionsService {
+        constructor<span class="fstat-no" title="function not covered" >($resource, $q) {</span>
+<span class="cstat-no" title="statement not covered" >            this._talents = $resource("pluginresource/Character/Talents.json").query().$promise.then(talents =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                return talents.map(talent =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                    var predicates = [];</span>
+<span class="cstat-no" title="statement not covered" >                    this._talents.prerequisites.forEach((prerequisite) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                        switch (prerequisite.property) {</span>
+                            case "characteristic":
+                                {
+<span class="cstat-no" title="statement not covered" >                                    predicates.push((character) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                                        return character.characteristics.get(Characteristic_1.Characteristic.characteristics.get(prerequisite.value.name)) &gt;= prerequisite.value.rating;</span>
+                                    });
+<span class="cstat-no" title="statement not covered" >                                    break;</span>
+                                }
+                            case "talent":
+                                {
+<span class="cstat-no" title="statement not covered" >                                    predicates.push((character) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                                        return character.talents.find(talent =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                                            return talent.name === this._skills;</span>
+                                        });
+                                    });
+<span class="cstat-no" title="statement not covered" >                                    break;</span>
+                                }
+                            case "skill":
+                                {
+<span class="cstat-no" title="statement not covered" >                                    predicates.push((character) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                                        return character.skills.find(skill =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                                            return skill.name === prerequisite.value.name &amp;&amp; skill.rank === prerequisite.value.rating;</span>
+                                        });
+                                    });
+<span class="cstat-no" title="statement not covered" >                                    break;</span>
+                                }
+                            case "psy rating":
+                                {
+<span class="cstat-no" title="statement not covered" >                                    predicates.push((character) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                                        return character.powers.psyRating === prerequisite.rating;</span>
+                                    });
+                                }
+                            case "character kit":
+                                {
+<span class="cstat-no" title="statement not covered" >                                    predicates.push((character) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                                        var matchFound = false;</span>
+<span class="cstat-no" title="statement not covered" >                                        for (let item of character.kit.keys()) {</span>
+<span class="cstat-no" title="statement not covered" >                                            for (let property in prerequisite.value) {</span>
+<span class="cstat-no" title="statement not covered" >                                                if (item[property] !== prerequisite.value[property]) {</span>
+<span class="cstat-no" title="statement not covered" >                                                    matchFound = false;</span>
+<span class="cstat-no" title="statement not covered" >                                                    break;</span>
+                                                }
+<span class="cstat-no" title="statement not covered" >                                                matchFound = true;</span>
+                                            }
+<span class="cstat-no" title="statement not covered" >                                            if (matchFound) {</span>
+<span class="cstat-no" title="statement not covered" >                                                break;</span>
+                                            }
+                                        }
+<span class="cstat-no" title="statement not covered" >                                        return matchFound;</span>
+                                    });
+                                }
+                            case "trait":
+                                {
+<span class="cstat-no" title="statement not covered" >                                    predicates.push((character) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                                        return character.traits.find((trait) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                                            return trait.name == prerequisite.value.name;</span>
+                                        });
+                                    });
+<span class="cstat-no" title="statement not covered" >                                    break;</span>
+                                }
+                            case "power":
+                                {
+<span class="cstat-no" title="statement not covered" >                                    predicates.push((character) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                                        return character.powers.powers.find(power =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                                            return power.name === prerequisite.value;</span>
+                                        });
+                                    });
+<span class="cstat-no" title="statement not covered" >                                    break;</span>
+                                }
+                            default:
+<span class="cstat-no" title="statement not covered" >                                throw "Unknown property" + prerequisite.property;</span>
+                        }
+                    });
+<span class="cstat-no" title="statement not covered" >                    return new Talent_1.Talent(talent.name, talent.source, talent.tier, talent.aptitudes, talent.specialization, new Prerequisite_1.Prerequisite((target) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                        return predicates;</span>
+                    }));
+                });
+            });
+<span class="cstat-no" title="statement not covered" >            this</span>
+                .
+                    _skills = $resource("pluginresource/Character/Skills.json").query().$promise;
+<span class="cstat-no" title="statement not covered" >            this</span>
+                .
+                    _powers = $resource("pluginresource/Character/Powers.json").query().$promise;
+<span class="cstat-no" title="statement not covered" >            this</span>
+                .
+                    _weapons = $resource("pluginresource/Character/Weapons.json").query().$promise;
+<span class="cstat-no" title="statement not covered" >            this</span>
+                .
+                    _armor = $resource("pluginresource/Character/Armor.json").query().$promise;
+<span class="cstat-no" title="statement not covered" >            this</span>
+                .
+                    _items = $resource("pluginresource/Character/Items.json").query().$promise;
+<span class="cstat-no" title="statement not covered" >            this</span>
+                .
+                    _vehicles = $resource("pluginresource/Character/Vehicles.json").query().$promise;
+<span class="cstat-no" title="statement not covered" >            this</span>
+                .
+                    _traits = $resource("pluginresource/Character/Traits.json").query().$promise;
+        }
+        get talents<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >            return this._talents;</span>
+        }
+        get skills<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >            return this._skills;</span>
+        }
+        get powers<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >            return this._powers;</span>
+        }
+        get fatePointRolls<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >            return this._fatePointRolls;</span>
+        }
+        get weapons<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >            return this._weapons;</span>
+        }
+        get armor<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >            return this._armor;</span>
+        }
+        get items<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >            return this._items;</span>
+        }
+        get vehicles<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >            return this._vehicles;</span>
+        }
+        get traits<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >            return this._traits;</span>
+        }
+    }
+    exports.CharacterOptionsService = CharacterOptionsService;
+});
+//# sourceMappingURL=CharacterOptionsService.js.map</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jul 20 2016 13:22:42 GMT-0700 (Pacific Daylight Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

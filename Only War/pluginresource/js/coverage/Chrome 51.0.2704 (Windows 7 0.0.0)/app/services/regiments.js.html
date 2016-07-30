@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for app\services\regiments.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">app/services/</a> regiments.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">4.76% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>2/42</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">25% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">4.88% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>2/41</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">define(["require", "exports", "../types/character/Characteristic", "../types/character/Talent", "../types/character/Regiment", "../types/character/Trait", "../types/character/CharacterModifier"], function (require, exports, Characteristic_1, Talent_1, Regiment_1, Trait_1, CharacterModifier_1) {
+    "use strict";
+    /**
+     * Created by Damien on 7/12/2016.
+     */
+    class RegimentService {
+        constructor<span class="fstat-no" title="function not covered" >($resource, $q, placeholders) {</span>
+<span class="cstat-no" title="statement not covered" >            this._regiments = $q.all({</span>
+                regiments: $resource("pluginresource/Regiment/Regiments.json").query().$promise,
+                placeholders: placeholders
+            }).then(<span class="fstat-no" title="function not covered" >function (result) {</span>
+<span class="cstat-no" title="statement not covered" >                return result.regiments.map(regiment =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                    var characteristics = new Map();</span>
+<span class="cstat-no" title="statement not covered" >                    for (var characteristicName in regiment['fixed modifiers'].characteristics) {</span>
+<span class="cstat-no" title="statement not covered" >                        characteristics.set(Characteristic_1.Characteristic.characteristics.get(characteristicName), regiment['fixed modifiers'].characteristics[characteristicName]);</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    var aptitudes = regiment['fixed modifiers'].aptitudes;</span>
+<span class="cstat-no" title="statement not covered" >                    var characterSkills = new Array();</span>
+<span class="cstat-no" title="statement not covered" >                    for (var skillName in regiment['fixed modifiers'].skills) {</span>
+<span class="cstat-no" title="statement not covered" >                        var skill = result.placeholders.replace(skillName, "skill");</span>
+<span class="cstat-no" title="statement not covered" >                        characterSkills.push(skill);</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    var characterTalents = new Array();</span>
+<span class="cstat-no" title="statement not covered" >                    for (var talentDescription of regiment['fixed modifiers'].talents) {</span>
+<span class="cstat-no" title="statement not covered" >                        var talentName = talentDescription.substring(0, talentDescription.indexOf("(") == -1 ? talentDescription.length : talentDescription.indexOf("(")).trim();</span>
+<span class="cstat-no" title="statement not covered" >                        let specialization = talentDescription.substring(talentDescription.indexOf("(") + 1, talentDescription.indexOf((")")));</span>
+<span class="cstat-no" title="statement not covered" >                        var talent = result.placeholders.replace(talentDescription, "talent");</span>
+<span class="cstat-no" title="statement not covered" >                        characterTalents.push(new Talent_1.Talent(talent.name, talent.source, talent.tier, talent.aptitudes, specialization, talent.prerequisites, talent.maxTimesPurchaseable));</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    var characterTraits = new Array();</span>
+<span class="cstat-no" title="statement not covered" >                    if (regiment['fixed modifiers'].traits) {</span>
+<span class="cstat-no" title="statement not covered" >                        for (var traitDescription of regiment['fixed modifiers'].traits) {</span>
+<span class="cstat-no" title="statement not covered" >                            var traitName = traitDescription.substring(0, traitDescription.indexOf("(") == -1 ? traitDescription.length : traitDescription.indexOf("(")).trim();</span>
+<span class="cstat-no" title="statement not covered" >                            var specialization = traitDescription.substring(traitDescription.indexOf("(") + 1, traitDescription.indexOf(")"));</span>
+<span class="cstat-no" title="statement not covered" >                            var trait = result.placeholders.replace(traitDescription, "trait");</span>
+<span class="cstat-no" title="statement not covered" >                            characterTraits.push(new Trait_1.Trait(trait.name, trait.description));</span>
+                        }
+                    }
+<span class="cstat-no" title="statement not covered" >                    var kit = new Map();</span>
+<span class="cstat-no" title="statement not covered" >                    for (var itemDescription of regiment['fixed modifiers']['character kit']) {</span>
+<span class="cstat-no" title="statement not covered" >                        var item = result.placeholders.replace(itemDescription, "item");</span>
+<span class="cstat-no" title="statement not covered" >                        kit.set(item, itemDescription.count);</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    var wounds = regiment['fixed modifiers'].wounds;</span>
+<span class="cstat-no" title="statement not covered" >                    var optionalModifiers = Array();</span>
+<span class="cstat-no" title="statement not covered" >                    if (regiment['optional modifiers']) {</span>
+<span class="cstat-no" title="statement not covered" >                        for (var optional of regiment['optional modifiers']) {</span>
+<span class="cstat-no" title="statement not covered" >                            optionalModifiers.push(new CharacterModifier_1.SelectableModifier(optional.selections, optional.options.map(optionGroup =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                                optionGroup.description = optionGroup.map(o =&gt; <span class="cstat-no" title="statement not covered" >o.value)</span>.join(" or ");</span>
+<span class="cstat-no" title="statement not covered" >                                return optionGroup.map(option =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                                    option.value = result.placeholders.replace(option.value, option.property);</span>
+<span class="cstat-no" title="statement not covered" >                                    var options = [];</span>
+<span class="cstat-no" title="statement not covered" >                                    return option;</span>
+                                });
+                            })));
+                        }
+                    }
+<span class="cstat-no" title="statement not covered" >                    return new Regiment_1.Regiment(regiment.name, characteristics, characterSkills, characterTalents, regiment['fixed modifiers'].aptitudes, characterTraits, kit, wounds, optionalModifiers);</span>
+                });
+            });
+        }
+        get regiments<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >            return this._regiments;</span>
+        }
+    }
+    exports.RegimentService = RegimentService;
+});
+//# sourceMappingURL=regiments.js.map</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jul 20 2016 13:22:42 GMT-0700 (Pacific Daylight Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
