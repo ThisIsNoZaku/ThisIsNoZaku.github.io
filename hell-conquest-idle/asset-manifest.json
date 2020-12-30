@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/hell-conquest-idle/static/css/main.b2d2cc2b.chunk.css",
-    "main.js": "/hell-conquest-idle/static/js/main.d5a18ebc.chunk.js",
-    "main.js.map": "/hell-conquest-idle/static/js/main.d5a18ebc.chunk.js.map",
+    "main.js": "/hell-conquest-idle/static/js/main.fbe6b951.chunk.js",
+    "main.js.map": "/hell-conquest-idle/static/js/main.fbe6b951.chunk.js.map",
     "runtime-main.js": "/hell-conquest-idle/static/js/runtime-main.eb0c9457.js",
     "runtime-main.js.map": "/hell-conquest-idle/static/js/runtime-main.eb0c9457.js.map",
     "static/css/2.6c0f60ba.chunk.css": "/hell-conquest-idle/static/css/2.6c0f60ba.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.6c0f60ba.chunk.css",
     "static/js/2.b8550700.chunk.js",
     "static/css/main.b2d2cc2b.chunk.css",
-    "static/js/main.d5a18ebc.chunk.js"
+    "static/js/main.fbe6b951.chunk.js"
   ]
 }
