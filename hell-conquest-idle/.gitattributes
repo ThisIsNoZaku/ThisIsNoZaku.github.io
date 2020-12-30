@@ -1,0 +1,4 @@
+backgrounds/ filter=lfs diff=lfs merge=lfs -text
+icons/ filter=lfs diff=lfs merge=lfs -text
+items/ filter=lfs diff=lfs merge=lfs -text
+monsters/ filter=lfs diff=lfs merge=lfs -text
