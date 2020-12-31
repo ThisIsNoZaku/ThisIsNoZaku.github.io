@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/hell-conquest-idle/static/css/main.b2d2cc2b.chunk.css",
-    "main.js": "/hell-conquest-idle/static/js/main.34680c58.chunk.js",
-    "main.js.map": "/hell-conquest-idle/static/js/main.34680c58.chunk.js.map",
-    "runtime-main.js": "/hell-conquest-idle/static/js/runtime-main.eb0c9457.js",
-    "runtime-main.js.map": "/hell-conquest-idle/static/js/runtime-main.eb0c9457.js.map",
+    "main.js": "/hell-conquest-idle/static/js/main.3882e8b3.chunk.js",
+    "main.js.map": "/hell-conquest-idle/static/js/main.3882e8b3.chunk.js.map",
+    "runtime-main.js": "/hell-conquest-idle/static/js/runtime-main.0b062342.js",
+    "runtime-main.js.map": "/hell-conquest-idle/static/js/runtime-main.0b062342.js.map",
     "static/css/2.6c0f60ba.chunk.css": "/hell-conquest-idle/static/css/2.6c0f60ba.chunk.css",
-    "static/js/2.b80d3ab7.chunk.js": "/hell-conquest-idle/static/js/2.b80d3ab7.chunk.js",
-    "static/js/2.b80d3ab7.chunk.js.map": "/hell-conquest-idle/static/js/2.b80d3ab7.chunk.js.map",
-    "static/js/3.4dd0d464.chunk.js": "/hell-conquest-idle/static/js/3.4dd0d464.chunk.js",
-    "static/js/3.4dd0d464.chunk.js.map": "/hell-conquest-idle/static/js/3.4dd0d464.chunk.js.map",
+    "static/js/2.8dd27d49.chunk.js": "/hell-conquest-idle/static/js/2.8dd27d49.chunk.js",
+    "static/js/2.8dd27d49.chunk.js.map": "/hell-conquest-idle/static/js/2.8dd27d49.chunk.js.map",
+    "static/js/3.99958577.chunk.js": "/hell-conquest-idle/static/js/3.99958577.chunk.js",
+    "static/js/3.99958577.chunk.js.map": "/hell-conquest-idle/static/js/3.99958577.chunk.js.map",
     "index.html": "/hell-conquest-idle/index.html",
     "static/css/2.6c0f60ba.chunk.css.map": "/hell-conquest-idle/static/css/2.6c0f60ba.chunk.css.map",
     "static/css/main.b2d2cc2b.chunk.css.map": "/hell-conquest-idle/static/css/main.b2d2cc2b.chunk.css.map",
-    "static/js/2.b80d3ab7.chunk.js.LICENSE.txt": "/hell-conquest-idle/static/js/2.b80d3ab7.chunk.js.LICENSE.txt"
+    "static/js/2.8dd27d49.chunk.js.LICENSE.txt": "/hell-conquest-idle/static/js/2.8dd27d49.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.eb0c9457.js",
+    "static/js/runtime-main.0b062342.js",
     "static/css/2.6c0f60ba.chunk.css",
-    "static/js/2.b80d3ab7.chunk.js",
+    "static/js/2.8dd27d49.chunk.js",
     "static/css/main.b2d2cc2b.chunk.css",
-    "static/js/main.34680c58.chunk.js"
+    "static/js/main.3882e8b3.chunk.js"
   ]
 }
